@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="container styler">
+    <form method='POST'>
+        {% csrf_token %}
+        <p class="headone" style="font-size: 20px">Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" class="btn btn-danger" value="DELETE" id="">
+        <a class="btn btn-danger" href="{% url 'post_detail' pk=post.pk %}">CANCEL</a>
+    </form>
+</div>
+{% endblock %}

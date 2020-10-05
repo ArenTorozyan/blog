@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>THE BLOG</title>
+    <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+
+    <!-- Medium Style Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css"
+        type="text/css" media="screen" charset="utf-8">
+
+    <!-- Custom CSS -->
+
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <!-- Font Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital@1&family=Roboto+Mono:wght@300&display=swap"
+        rel="stylesheet">
+
+    <!-- BACKGROUND -->
+    {% block additional_styles %}
+    <style>
+        body {
+            background: url('/static/images/moon.jpg');
+            background-position: top;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+    {% endblock %}
+</head>
+
+<body class="loader">
+
+    <!-- NavBar -->
+    <nav class="navbar navbar-nav sticky-top navbar-expand-md navbar-dark bg-custom bar">
+        <div class="navbar-nav align-items-center">
+            <a class='navbar-brand' style="margin-left: 7%; text-shadow: #dddddd 3px 5px 5px;"
+                href="{% url 'post_list' %}">THE BLOG</a>
+            <a class='nav-item nav-link' href="{% url 'about'%}">About<span class="sr-only">(current)</span></a>
+            <a class='nav-item nav-link' href="https://www.github.com">GitHub<span class="sr-only"></span></a>
+            <a class='nav-item nav-link' href="https://www.pinterest.com">Pinterest<span class="sr-only"></span></a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <div class="navbar-nav align-items-center ml-auto">
+                {% if user.is_authenticated %}
+                <ul class="navbar-nav align-items-center">
+                    <li class='nav-item'><a class='nav-link' href=" {% url 'post_new' %}">New Post<span
+                                class="sr-only"></span></a></li>
+                    <li class='nav-item'><a class='nav-link' href="{% url 'post_draft_list' %}">DRAFTS</a></li>
+                    <li class='nav-item'><a class='nav-link' href="{% url 'logout' %}">Log out</a></li>
+                    <li class='nav-item'><a class='nav-link'>Welcome: {{ user.username }}</a></li>
+                </ul>
+                {% else %}
+                <a class='navbar-brand' href=" {% url 'login' %}"><i class="fas fa-user"></a></i>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT BLOCK -->
+    <div class='content container'>
+        <div class="row">
+            <div class='col-md-8'>
+                <div class="blog_posts">
+                    {% block content %}
+
+                    {% endblock%}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JQuiry and JS for bootstrap -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

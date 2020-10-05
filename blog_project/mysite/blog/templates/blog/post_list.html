@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="centerstage styler">
+
+    {% if user.is_authenticated %}
+    <h1 class="headone">Hello, {{user.username}}!</h1>
+    {% else %}
+    <h1 class="headone">Hi, sign in top-right corner!</h1>
+    {% endif %}
+
+    <h5 class="headone" style="font-style: bold;"> Check out the most recent posts:</h5>
+    {% for post in post_list  %}
+    <div class="post">
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{post.title}} </a></h1>
+        <div class="date">
+            <p>Published on: {{post.published_date|date:'D M Y'}}</p>
+        </div>
+        <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{post.approved_comments.count}}</a>
+    </div>
+    {% endfor %}
+
+
+</div>
+
+{% endblock %}
